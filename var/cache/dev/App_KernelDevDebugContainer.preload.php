@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'\\vendor/autoload.php';
-require __DIR__.'/ContainerXT6CxMv/App_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerOpuDMoH/App_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -19,6 +19,8 @@ $classes[] = 'Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle';
 $classes[] = 'Symfony\Bundle\MakerBundle\MakerBundle';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
 $classes[] = 'App\Controller\HomeController';
+$classes[] = 'App\Controller\PostController';
+$classes[] = 'App\Repository\CategoryRepository';
 $classes[] = 'App\Repository\PostRepository';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController';
@@ -180,10 +182,10 @@ $classes[] = 'Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder';
 $classes[] = 'Symfony\Bundle\MakerBundle\Generator';
 $classes[] = 'Symfony\Bundle\MakerBundle\Renderer\FormTypeRenderer';
 $classes[] = 'Symfony\Bundle\MakerBundle\Security\SecurityConfigUpdater';
+$classes[] = 'Symfony\Component\DependencyInjection\ParameterBag\ContainerBag';
 $classes[] = 'Symfony\Component\HttpFoundation\RequestStack';
 $classes[] = 'Symfony\Component\HttpKernel\EventListener\ResponseListener';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Routing\Router';
-$classes[] = 'Symfony\Component\DependencyInjection\ParameterBag\ContainerBag';
 $classes[] = 'Symfony\Component\Config\ResourceCheckerConfigCacheFactory';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer';
 $classes[] = 'Symfony\Component\Routing\RequestContext';

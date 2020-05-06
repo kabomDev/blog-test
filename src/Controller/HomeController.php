@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use PDO;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class HomeController
+class HomeController extends AbstractController
 {
 
     // /**
@@ -33,15 +36,21 @@ class HomeController
     // }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/test/{id}", name="test")
      * comment récupérer du contenu dans la bdd
      */
-    public function test(EntityManagerInterface $em, PostRepository $repository)
+    public function test(EntityManagerInterface $em, PostRepository $repository, CategoryRepository $categoryRepository, $id)
     {
-        $posts = $repository->findAll();
-        //$em->remove($post);
-        //$em->flush();
-        dd($posts);
+
+        $category = $categoryRepository->find($id);
+
+        if (!$category) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('category.html.twig', [
+            'category' => $category
+        ]);
     }
 
 
@@ -49,10 +58,9 @@ class HomeController
      * @Route("/", name="home")
      *
      */
-    public function index(Environment $twig): Response
+    public function index(): Response
     {
-        $html = $twig->render('home.html.twig');
-        return new Response($html);
+        return $this->render('home.html.twig');
     }
 
     /**
@@ -60,7 +68,7 @@ class HomeController
      *
      * @return Response
      */
-    public function hello(string $name, Environment $twig, PDO $db): Response
+    public function hello(string $name, PDO $db): Response
     {
         // $db = new \PDO('mysql:host=localhost;dbname=animaux;charset=utf8', 'root', '', [
         //     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -80,7 +88,7 @@ class HomeController
 
         $formateur = ['prenom' => 'Lior', 'nom' => 'chamla'];
 
-        $html = $twig->render(
+        return $this->render(
             'hello.html.twig',
             [
                 'prenoms' => $prenoms,
@@ -89,6 +97,5 @@ class HomeController
                 'products' => $products
             ]
         );
-        return new Response($html);
     }
 }

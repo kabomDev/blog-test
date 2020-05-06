@@ -15,7 +15,9 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "bluemmb/faker-picsum-photos-provider": "^1.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "fzaninotto/faker": "^1.9",
         "symfony/maker-bundle": "^1.15"
     },
     "config": {

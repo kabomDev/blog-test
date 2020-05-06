@@ -4,6 +4,7 @@
 
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
+    'test' => [['id'], ['_controller' => 'App\\Controller\\HomeController::test'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/test']], [], []],
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], []],
     'hello' => [['name'], ['name' => 'World', '_controller' => 'App\\Controller\\HomeController::hello'], [], [['variable', '/', '[^/]++', 'name', true], ['text', '/hello']], [], []],
 ];

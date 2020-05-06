@@ -74,6 +74,10 @@ class ComposerStaticInit1f3f4278a170c139e529019762335a15
             'Laminas\\EventManager\\' => 21,
             'Laminas\\Code\\' => 13,
         ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
         'D' => 
         array (
             'Doctrine\\Persistence\\' => 21,
@@ -91,6 +95,10 @@ class ComposerStaticInit1f3f4278a170c139e529019762335a15
             'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
             'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
+        ),
+        'B' => 
+        array (
+            'Bluemmb\\Faker\\' => 14,
         ),
         'A' => 
         array (
@@ -276,6 +284,10 @@ class ComposerStaticInit1f3f4278a170c139e529019762335a15
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-code/src',
         ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
         'Doctrine\\Persistence\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Persistence',
@@ -338,6 +350,10 @@ class ComposerStaticInit1f3f4278a170c139e529019762335a15
         'Doctrine\\Bundle\\DoctrineBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
+        ),
+        'Bluemmb\\Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bluemmb/faker-picsum-photos-provider',
         ),
         'App\\Tests\\' => 
         array (

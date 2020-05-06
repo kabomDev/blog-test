@@ -16,13 +16,15 @@ return [
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:35)'
                 .'|/test/([^/]++)(*:56)'
                 .'|/hello(?:/([^/]++))?(*:83)'
+                .'|/blog/([^/]++)(*:104)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         35 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
         56 => [[['_route' => 'test', '_controller' => 'App\\Controller\\HomeController::test'], ['id'], null, null, false, true, null]],
-        83 => [
-            [['_route' => 'hello', 'name' => 'World', '_controller' => 'App\\Controller\\HomeController::hello'], ['name'], null, null, false, true, null],
+        83 => [[['_route' => 'hello', 'name' => 'World', '_controller' => 'App\\Controller\\HomeController::hello'], ['name'], null, null, false, true, null]],
+        104 => [
+            [['_route' => 'post_show', '_controller' => 'App\\Controller\\PostController::show'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

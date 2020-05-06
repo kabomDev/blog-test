@@ -7,4 +7,6 @@ return [
     'test' => [['id'], ['_controller' => 'App\\Controller\\HomeController::test'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/test']], [], []],
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], []],
     'hello' => [['name'], ['name' => 'World', '_controller' => 'App\\Controller\\HomeController::hello'], [], [['variable', '/', '[^/]++', 'name', true], ['text', '/hello']], [], []],
+    'post' => [[], ['_controller' => 'App\\Controller\\PostController::index'], [], [['text', '/blog']], [], []],
+    'post_show' => [['id'], ['_controller' => 'App\\Controller\\PostController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/blog']], [], []],
 ];

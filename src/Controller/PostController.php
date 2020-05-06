@@ -19,4 +19,18 @@ class PostController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+    /**
+     * @Route("/blog/{id}",name="post_show")
+     */
+    public function show($id, PostRepository $postRepository)
+    {
+        $post = $postRepository->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('post/show.html.twig', ['post'=> $post]);
+    }
 }

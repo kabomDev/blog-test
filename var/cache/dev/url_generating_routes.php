@@ -7,6 +7,9 @@ return [
     'test' => [['id'], ['_controller' => 'App\\Controller\\HomeController::test'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/test']], [], []],
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], []],
     'hello' => [['name'], ['name' => 'World', '_controller' => 'App\\Controller\\HomeController::hello'], [], [['variable', '/', '[^/]++', 'name', true], ['text', '/hello']], [], []],
-    'post' => [[], ['_controller' => 'App\\Controller\\PostController::index'], [], [['text', '/blog']], [], []],
+    'post_index' => [[], ['_controller' => 'App\\Controller\\PostController::index'], [], [['text', '/blog']], [], []],
     'post_show' => [['id'], ['_controller' => 'App\\Controller\\PostController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/blog']], [], []],
+    'post_create' => [[], ['_controller' => 'App\\Controller\\PostController::create'], [], [['text', '/admin/create']], [], []],
+    'post_edit' => [['id'], ['_controller' => 'App\\Controller\\PostController::edit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/edit']], [], []],
+    'post_delete' => [['id'], ['_controller' => 'App\\Controller\\PostController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/delete']], [], []],
 ];

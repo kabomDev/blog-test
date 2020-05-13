@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modifier un article
+{% endblock %}
+
+{% block body %}
+<div class="ml-3">
+    <h1>Modification d'un article</h1>
+
+    {{form_start(postForm)}}
+    {{form_widget(postForm)}}
+
+    <button type="submit">Enregister les modifications</button>
+
+    {{form_end(postForm)}}
+</div>
+{% endblock %}

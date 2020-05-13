@@ -2,14 +2,21 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\Post;
+use App\Form\PostType;
+use App\Form\CommentType;
 use App\Repository\PostRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostController extends AbstractController
 {
     /**
-     * @Route("/blog", name="post")
+     * @Route("/blog", name="post_index")
      */
     public function index(PostRepository $postRepository)
     {
@@ -23,14 +30,97 @@ class PostController extends AbstractController
     /**
      * @Route("/blog/{id}",name="post_show")
      */
-    public function show($id, PostRepository $postRepository)
+    public function show(Post $post, Request $request, EntityManagerInterface $em)
     {
-        $post = $postRepository->find($id);
+        $form = $this->createForm(CommentType::class);
+        $form->handleRequest($request);
 
-        if (!$post) {
-            throw $this->createNotFoundException();
+        if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var \App\Entity\Comment
+             */
+            $comment = $form->getData();
+
+            $comment
+                ->setCreatedAt(new DateTime())
+                ->setPost($post);
+
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
-        return $this->render('post/show.html.twig', ['post'=> $post]);
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+            'commentForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/create", name="post_create")
+     */
+    public function create(Request $request, EntityManagerInterface $em, UrlGeneratorInterface $generator)
+    {
+
+        $form = $this->createForm(PostType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            /**
+             * @var \App\Entity\Post
+             */
+            $post = $form->getData();
+            $post->setCreatedAt(new DateTime());
+
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('post_show', [
+                'id' => $post->getId()
+            ]);
+        }
+
+        return $this->render('post/create.html.twig', [
+            'postForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/edit/{id}", name="post_edit")
+     */
+    public function edit(Post $post, Request $request, EntityManagerInterface $em)
+    {
+        //on crée un formulaire
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('post_show', [
+                'id' => $post->getId()
+            ]);
+        }
+
+        //on affiche le formulaire
+        return $this->render('post/edit.html.twig', [
+            'postForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/delete/{id}", name="post_delete")
+     *
+     * @return void
+     */
+    public function delete(Post $post, EntityManagerInterface $em)
+    {
+        $em->remove($post);
+        $em->flush();
+
+        return $this->redirectToRoute("post_index");
     }
 }

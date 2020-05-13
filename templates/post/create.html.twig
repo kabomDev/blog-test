@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{# on indique le chemin du template à utiliser #}
+{# {% form_theme postForm 'post/bootstrap-form-theme.html.twig' %} #}
+
+{% block body %}
+    <h1>Créer un article</h1>
+
+    {# {{ form(postForm) }} #}
+
+    {{ form_start(postForm) }}
+        <p>Remplissez</p>
+    {{form_row(postForm.title)}}    
+    {{form_row(postForm.content)}}    
+    {{form_row(postForm.image)}}
+        {# <button type="submit">Inscription</button> #}
+    {{form_row(postForm.submit)}}
+    {{form_end(postForm)}}
+
+{% endblock %}
+
+
+
